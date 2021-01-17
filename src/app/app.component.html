@@ -1,0 +1,72 @@
+<div class="outer-wrapper">
+  <div class="wrapper p--1">
+    <h2>SpaceX Launch Programs</h2>
+    <div class="flex-row flex-direction flex-shrink">
+      <div class="filter-content background-white mt--1 p--1">
+        <p class="font-20 font-weight-bold">Filters</p>
+        <div class="year-filter p--0-4">
+          <p class="filter-heading">Launch Year</p>
+          <div class="years-buttons">
+            <div class="button-wrap" *ngFor="let item of yearsListArray; let i = index"
+              [ngClass]="{'text-align-right': 0 === (i+1) % 2}">
+              <button class="button" value="{{item}}" (click)="applyFilter(item)"
+                [ngClass]="{'active': isSelectedYear === item}">{{item}}</button>
+            </div>
+          </div>
+        </div>
+        <div class="launch-filter">
+          <p class="filter-heading">Successfull Launch</p>
+          <div class="launch-buttons">
+            <div class="button-wrap">
+              <button class="button" (click)="applyFilter('launchTrue')"
+                [ngClass]="{'active': isSelectedLaunch === 'launchTrue'}">True</button>
+            </div>
+            <div class="button-wrap text-align-right">
+              <button class="button" (click)="applyFilter('launchFalse')"
+                [ngClass]="{'active': isSelectedLaunch === 'launchFalse'}">False</button>
+            </div>
+          </div>
+        </div>
+        <div class="landing-filter">
+          <p class="filter-heading">Successfull Landing</p>
+          <div class="landing-buttons">
+            <div class="button-wrap">
+              <button class="button" (click)="applyFilter('landTrue')"
+                [ngClass]="{'active': isSelectedLanding === 'landTrue'}">True</button>
+            </div>
+            <div class="button-wrap text-align-right">
+              <button class="button" (click)="applyFilter('landFalse')"
+                [ngClass]="{'active': isSelectedLanding === 'landFalse'}">False</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-content mt--1">
+        <h1 *ngIf="isLoading">Loading.....</h1>
+        <h1 *ngIf="!isLoading && spaceXData.length === 0">No Data</h1>
+        <div class="items">
+          <div class="cards pt--8 background-white" *ngFor="let item of spaceXData">
+            <div class="img-wrap">
+              <img src="{{item.links.mission_patch_small}}">
+            </div>
+            <h3>{{item.mission_name}} #{{item.flight_number}}</h3>
+            <div class="spacex-details">
+              <p class="font-weight-bold">Mission Ids: </p>
+              <ul *ngIf="item.mission_id.length > 0">
+                <li *ngFor="let mission of item.mission_id" class="color-blue">{{mission}}</li>
+              </ul>
+              <p><span class="font-weight-bold">Launch Year: </span><span class="color-blue text-capitalize">{{item.launch_year}}</span></p>
+              <p><span class="font-weight-bold">Successfull Launch: </span><span class="color-blue text-capitalize">{{item.launch_success}}</span></p>
+              <p><span class="font-weight-bold">Successfull Landing: </span><span class="color-blue text-capitalize">{{item.rocket.first_stage.cores[0].land_success}}</span></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="flex-row flex-justify-content-space mt--1">
+      <p><span class="font-weight-bold">Developed By</span> Anshul Sinha</p>
+    </div>
+  </div>
+</div>
