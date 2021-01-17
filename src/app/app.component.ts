@@ -122,7 +122,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.spaceXDataSubscription = this.spaceXService.getSpaceXData(url).subscribe((data) => {
       this.isLoading = false;
       this.spaceXData = data;
-      this.router.navigate(['.'], { relativeTo: this.activatedRouter, queryParams: { launch_year: yearFilter, launch_success: launchFilter, land_success: landFilter } });
+      // this.router.navigate(['.'], { relativeTo: this.activatedRouter, queryParams: { launch_year: yearFilter, launch_success: launchFilter, land_success: landFilter } });
     });
   }
 
